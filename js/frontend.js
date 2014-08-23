@@ -11,16 +11,16 @@ ctx.fillStyle = "#FF0000";
 ctx.fillRect(0,0,150,75);
 
 //draw horizontal lines
-for(i = 0; i < screen.tileH; ++i) {
+for(i = 0; i < screen.pixH / screen.tileH; i++) {
   ctx.beginPath();
-  ctx.moveTo(0, i * screen.pixH);
-  ctx.lineTo(screen.tileW * screen.pixW, i * screen.pixH)
+  ctx.moveTo(0, i * screen.tileH);
+  ctx.lineTo(screen.pixW, i * screen.tileH)
   ctx.stroke();
 }
 //draw vertical lines
-for(i = 0; i < screen.tileH; ++i) {
+for(i = 0; i < screen.pixW / screen.tileW; i++) {
   ctx.beginPath();
-  ctx.moveTo(i * screen.pixW, 0);
-  ctx.lineTo(i * screen.pixW, screen.tileH * screen.pixH);
+  ctx.moveTo(i * screen.tileW, 0);
+  ctx.lineTo(i * screen.tileW, screen.pixH);
   ctx.stroke();
 }
