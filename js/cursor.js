@@ -10,5 +10,5 @@ var canvas = document.getElementById('myCanvas');
 var context = canvas.getContext('2d');
 
 canvas.addEventListener('click', function(evt) {
-  getMousePos(canvas, evt);
+  var mousePosition = getMousePos(canvas, evt);
 }, false);
