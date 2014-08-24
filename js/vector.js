@@ -1,33 +1,43 @@
-//a simple 2-D vector 
-function Vec2(x, y) {
-  this.x = x;
-  this.y = y;
-}
-
+//the vector 2D namespace 
+var Vec2 = {
+  //
 //add the other vector to this vector
-Vec2.prototype.add = function(other) {
-  this.x += other.x;
-  this.y += other.y;
-}
+sum: function(v1, v2) {
+  return {
+    x: v1.x + v2.x,
+    y: v1.y + v2.y
+  };
+},
 
 //get the magnitude of this vector
-Vec2.prototype.mag = function() {
-  return Math.sqrt(this.x * this.x + this.y * this.y);
-}
+mag: function(v) {
+  return Math.sqrt(v.x * v.x + v.y * v.y);
+},
 
 //get the distance to the given other 2-D vector
-Vec2.prototype.distance = function(other) {
-  return Math.sqrt((this.x * this.x - other.x * other.x) +
-      (this.y * this.y - other.y * other.y));
-}
+distance: function(v1, v2) {
+  return Math.sqrt(((v2.x - v1.x) * (v2.x - v1.x)) + ((v2.y - v1.y) * (v2.y - v1.y)));
+},
 
 //get the unit direction between this vector and the given other 2-D vector
-Vec2.prototype.direction = function(other) {
-  return Math.atan((other.y - this.y) / (other.x - this.x));
-}
+direction: function(v1, v2) {
+  var v = {x: v2.x - v1.x, y: v2.y - v1.y};
+  var mag = Vec2.mag(v);
+  if(mag == 0.0) {
+    return {x: 0, y: 0};
+  }
+  return {
+    x: v.x / mag,
+    y: v.y / mag
+  };
+},
 
-//scale this vector by the given 2-D vector
-Vec2.prototype.scale = function(other) {
-  return new Vec2(this.x * other.x, this.y * other.y);
+//scale this vector by the given factor
+scale: function(v, s) {
+  return {
+    x: v.x * s,
+    y: v.y * s
+  }
 }
+};
 
