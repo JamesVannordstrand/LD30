@@ -53,4 +53,14 @@ Player.prototype.addResources = function(planet, amount){
   }else{
     this.homeWorldResources += amount;
   }  
-}   
+} 
+
+//draws all the players units 
+Player.prototype.drawAllUnits = function(){
+  for(var i = 0; i < this.homeWorldUnits.length; i++){
+    this.homeWorldUnits[i].draw;
+  }
+  for(var i = 0; i < this.frontierUnits.length; i++){
+    this.frontierUnits[i].draw;
+  }
+}
