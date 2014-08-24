@@ -8,21 +8,23 @@ function Player(name) {
 
 //draw player stats
 Player.prototype.drawPlayerHomeWorld = function(context) {
-  var message = "Resources - " 
+  var message = "HomeWorld Resources - " 
     + this.homeWorldResources;
   
+  context.textAlign = "center";
   context.fillStyle = "black";
   context.font = "20px Georgia";
-  return context.fillText(message, 100, 480);
+  return context.fillText(message, 160, 480);
 }
 
 Player.prototype.drawPlayerFrontier = function(context) {
-  var message = "Resources - " 
+  var message = "Frontier Resources - " 
     + this.frontierResources;
   
+  context.textAlign = "center";
   context.fillStyle = "black";
   context.font = "20px Georgia";
-  return context.fillText(message, 100, 480);
+  return context.fillText(message, 160, 480);
 }
 
 //add a specific unit to player
@@ -74,9 +76,34 @@ Player.prototype.drawFrontierUnits = function(ctx){
 }
 
 //takes resources from one planet to the other 
-transferResources = function(from, to, amount){
-  if(from.frontierResources >= amount){
-    from.addResources(from, -amount);
-    to.addResources(to, amount);
+transferResources = function(player, from){
+  if(from == "frontier"){
+    var amount = document.getElementById('frontierButton').value;
+    player.addResources(from, -amount);
+    player.addResources("homeWorld", amount);
+  }else{
+    var amount = document.getElementById('homeWorldButton').value;
+    player.addResources(from, -amount);
+    player.addResources("frontier", amount);
+  }
+}
+
+buyUnitFrontier = function(player, type){
+  if((type == "pig") && (player.frontierResources >= 40)){
+    player.addUnit("frontier", new PigUnit("frontier"));
+  }else if((type == "cow") && (player.frontierResources >= 60)){
+    player.addUnit("frontier", new CowUnit("frontier"));
+  }else if((type == "chicken") && (player.frontierResources >= 50)){
+    player.addUnit("frontier", new ChickenUnit("frontier"));
+  }
+}
+
+buyUnitHomeWorld = function(player, type){
+  if((type == "pig") && (player.homeWorldResources >= 40)){
+    player.addUnit("homeWorld", new PigUnit("homeWorld"));
+  }else if((type == "cow") && (player.homeWorldResources >= 60)){
+    player.addUnit("homeWorld", new CowUnit("homeWorld"));
+  }else if((type == "chicken") && (player.homeWorldResources >= 50)){
+    player.addUnit("homeWorld", new ChickenUnit("homeWorld"));
   }
 }

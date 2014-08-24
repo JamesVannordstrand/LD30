@@ -50,9 +50,9 @@ PigUnit.prototype = new Unit("Pig", "black", {x:150, y:150, w: 32, h:32}, 100);
 
 function ChickenUnit(planet) {
   if(planet == "frontier"){
-    this.imageArray = ["images/chicken_back_helmet.png", "images/chicken_left_helmet.png", "images/chicken_right_helmet.png.png", "images/chicken_front_helmet.png"];
+    this.imageArray = ["images/chicken_back_helmet.png", "images/chicken_front_helmet.png"];
   }else{
-    this.imageArray = ["images/chicken_back.png", "images/chicken_left.png", "images/chicken_right.png", "images/chicken_front.png"];
+    this.imageArray = ["images/chicken_back.png", "images/chicken_front.png"];
   }
 
   this.damage = 10;
@@ -60,14 +60,14 @@ function ChickenUnit(planet) {
 }
 
 ChickenUnit.prototype.drawUnit = function(ctx, drawName){
-  this.draw(ctx, drawName, this.imageArray[3], this.rect.x, this.rect.y);
+  this.draw(ctx, drawName, this.imageArray[1], this.rect.x, this.rect.y);
 }
 
 function CowUnit(planet) {
   if(planet == "frontier"){
-    this.imageArray = ["images/cow_back_helmet.png", "images/cow_left_helmet.png", "images/cow_right_helmet.png.png", "images/cow_front_helmet.png"]
+    this.imageArray = ["images/cow_back_helmet.png", "images/cow_front_helmet.png"]
   }else{
-    this.imageArray = ["images/cow_back.png", "images/cow_left.png", "images/cow_right.png", "images/cow_front.png"]
+    this.imageArray = ["images/cow_back.png", "images/cow_front.png"]
   }
 
   this.damage = -5;
@@ -75,14 +75,14 @@ function CowUnit(planet) {
 }
 
 CowUnit.prototype.drawUnit = function(ctx, drawName){
-  this.draw(ctx, drawName, this.imageArray[3], this.rect.x, this.rect.y);
+  this.draw(ctx, drawName, this.imageArray[1], this.rect.x, this.rect.y);
 }
 
 function PigUnit(planet) {
   if(planet == "frontier"){
-    this.imageArray = ["images/pig_back_helmet.png", "images/pig_left_helmet.png", "images/pig_right_helmet.png.png", "images/pig_front_helmet.png"]
+    this.imageArray = ["images/pig_back_helmet.png", "images/pig_front_helmet.png"]
   }else{
-    this.imageArray = ["images/pig_back.png", "images/pig_left.png", "images/pig_right.png", "images/pig_front.png"]
+    this.imageArray = ["images/pig_back.png", "images/pig_front.png"]
   }
 
   this.damage = 3;
@@ -90,5 +90,5 @@ function PigUnit(planet) {
 }
 
 PigUnit.prototype.drawUnit = function(ctx, drawName){
-  this.draw(ctx, drawName, this.imageArray[3], this.rect.x, this.rect.y);
+  this.draw(ctx, drawName, this.imageArray[1], this.rect.x, this.rect.y);
 }

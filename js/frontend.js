@@ -31,12 +31,13 @@ Game.prototype.start = function() {
   //TODO: test unit
   // var lance = new Unit("lance", "#666000", {x:300, y:300, w: 32, h:32}, 100);
   // var blake = new Unit("blake", "red", {x:300, y:300, w: 32, h:32}, 100);
-  // var bryce = new Unit("bryce", "red", {x:300, y:300, w: 32, h:32}, 100);
+  var bryce = new PigUnit("homeWorld");
   var james = new ChickenUnit("frontier");
   // this.player.addUnit("frontier", lance);
   // this.player.addUnit("frontier", blake);
   // this.player.addUnit("frontier", bryce);
-  this.player.addUnit("homeWorld", james);
+  this.player.addUnit("frontier", james);
+  this.player.addUnit("homeWorld", bryce);
 }
 
 //draw the game
