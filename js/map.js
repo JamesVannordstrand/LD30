@@ -1,3 +1,4 @@
+//the map class
 function Map() {
   this.tileW = 20;
   this.tileH = 15;

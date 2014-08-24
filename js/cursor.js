@@ -1,13 +1,19 @@
-function getMousePos(canvas, evt) {
-  var rect = canvas.getBoundingClientRect();
-  return {
-    x: evt.clientX - rect.left,
-    y: evt.clientY - rect.top
-  };
+//the cursor class
+function Cursor(canvas, onClick) {
+  this.canvas = canvas;
+  this.onClick = onClick;
+  this.mousePos = new Vec2(0,0);
 }
 
-var canvas = document.getElementById('myCanvas');
+//get the mouse position on the given canvas
+Cursor.prototype.getMousePos = function(c, evt) {
+  var rect = c.getBoundingClientRect();
+  return new Vec2(evt.clientX - rect.left, evt.clientY - rect.top);
+};
 
-canvas.addEventListener('click', function(evt) {
-  var mousePosition = getMousePos(canvas, evt);
-}, false);
+//have the cursor listen for events on the given canvas
+//upon an event occuring, this cursor's 'onClick' function is called (onClick(evt))
+Cursor.prototype.listen = function(c) {
+  c.addEventListener('click', this.onClick, false);
+};
+
