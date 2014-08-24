@@ -34,14 +34,14 @@ Player.prototype.checkHealth = function(){
   for(var i = 0; i < this.frontierUnits.length; i++){
     if(this.frontierUnits[i].hp <= 0){
       var index = this.frontierUnits.indexOf(frontierUnits[i]);
-      this.frontierUnits = this.frontierUnits.splice(index, 1);
+      this.frontierUnits.splice(index, 1);
     }
   }
 
   for(var i = 0; i < this.homeWorldUnits.length; i++){
     if(this.homeWorldUnits[i].hp <= 0){
       var index = this.homeWorldUnits.indexOf(homeWorldUnits[i]);
-      this.homeWorldUnits = this.homeWorldUnits.splice(index, 1);
+      this.homeWorldUnits.splice(index, 1);
     } 
   }
 }
