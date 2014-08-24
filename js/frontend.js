@@ -11,6 +11,7 @@ Game.prototype.start = function() {
 
   //TODO: test unit
   this.lance = new Unit("lance", "#666000", {x:300, y:300, w: 32, h:32}, 100);
+  this.playerOne = new player("James", false);
 }
 
 //draw the game
@@ -25,6 +26,9 @@ Game.prototype.draw = function() {
 
   //TODO: test draw
   this.lance.draw(ctx, true);
+  
+  //draw the player
+  this.playerOne.drawPlayer(ctx);
 };
 
 //update the game
