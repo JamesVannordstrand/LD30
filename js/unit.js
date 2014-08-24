@@ -101,5 +101,16 @@ function PigUnit() {
     300   //hp
   );
 }
-
+function EnemyUnit() {
+  return new Unit(
+    "Enemy",  //unit name
+    ["images/alien_32.png"],
+    ["images/alien_32.png"],
+    "black",          //name color
+    {x: Math.floor((Math.random() * 290) + 1), y: 0},
+    .9,   //speed
+    3,    //damage
+    300   //hp
+  );
+}
 
