@@ -64,3 +64,11 @@ Player.prototype.drawAllUnits = function(){
     this.frontierUnits[i].draw;
   }
 }
+
+//takes resources from one planet to the other 
+transferResources = function(from, to, amount){
+  if(from.frontierResources >= amount){
+    from.addResources(from, -amount);
+    to.addResources(to, amount);
+  }
+}
