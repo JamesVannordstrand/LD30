@@ -1,22 +1,48 @@
 //creates a unit 
-function Unit(name, nameColor, speed, x, y) {
+function Unit(name, homeworldAnimation, frontierAnimation, nameColor, pos, speed, damage, hp) {
   this.name = name;
   this.nameColor = nameColor;
-  this.speed = speed;
 
-  this.pos = {x: 0, y: 0};
+  this.pos = pos;
   this.dest = {x: 100, y:100};
-  this.hp = 100;
+
+  this.speed = speed;
+  this.damage = damage;
+  this.hp = hp;
+
+  //get the frames of this sprite's animation
+  this.hAnimation = [];
+  this.fAnimation = [];
+
+  for(var i = 0; i < homeworldAnimation.length; ++i) {
+    var img = new Image();
+    img.src = homeworldAnimation[i];
+    this.hAnimation.push(img);
+  }
+  for(var i = 0; i < frontierAnimation.length; ++i) {
+    var img = new Image();
+    img.src = homeworldAnimation[i];
+    this.fAnimation.push(img);
+  }
+
+  planet = 0; //0=homeworld, 1=frontier
 }
 
 //draw the unit 
-Unit.prototype.draw = function(c, drawName) {
-  c.fillRect(this.pos.x, this.pos.y, 32, 32);
+Unit.prototype.draw = function(ctx, drawName) {
+  if(this.planet == 0) {
+    //draw homeworld sprite
+    ctx.drawImage(this.hAnimation[0], this.pos.x, this.pos.y);
+  }
+  else {
+    //draw frontier sprite
+    ctx.drawImage(this.fAnimation[0], this.pos.x, this.pos.y);
+  }
   if(drawName) {
-    c.textAlign = "center";
-    c.fillStyle = this.nameColor;
-    c.font = "20px Georgia";
-    c.fillText(this.name, this.pos.x+16, this.pos.y - 2);
+    ctx.textAlign = "center";
+    ctx.fillStyle = this.nameColor;
+    ctx.font = "20px Georgia";
+    ctx.fillText(this.name, this.pos.x+16, this.pos.y - 2);
   }
 };
 
@@ -38,4 +64,42 @@ Unit.prototype.update = function() {
     this.pos.y += dir.y * this.speed;
   }
 };
+
+function ChickenUnit() {
+  return new Unit(
+    "Chicken",  //unit name
+    ["images/chicken_back.png", "images/chicken_front.png"],   //homeworld sprites
+    ["images/chicken_back_helmet.png", "images/chicken_front_helmet.png"],  //frontier sprites
+    "black", //name color
+    {x:150, y:150}, //position
+    1.3,  //speed
+    10,   //damage
+    100   //hp
+  );
+}
+function CowUnit() {
+  return new Unit(
+    "Cow", //unit name
+    ["images/cow_back_helmet.png", "images/cow_front_helmet.png"],  //homeworld sprites
+    ["images/cow_back.png", "images/cow_front.png"], //frontier sprites
+    "black", //name color
+    {x: 100, y: 100}, //position
+    .6,   //speed
+    -5,   //damage
+    200   //hp
+  );
+}
+function PigUnit() {
+  return new Unit(
+    "Pig",  //unit name
+    ["images/pig_back_helmet.png", "images/pig_front_helmet.png"], //homeworld sprites
+    ["images/pig_back.png", "images/pig_front.png"],  //frontier sprites
+    "black",          //name color
+    {x: 100, y: 100}, //position
+    .9,   //speed
+    3,    //damage
+    300   //hp
+  );
+}
+
 
