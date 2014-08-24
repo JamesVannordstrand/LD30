@@ -12,13 +12,19 @@ function Unit(name, nameColor, rect, speed, pos, dest) {
 }
 
 //draw the unit 
-Unit.prototype.draw = function(c, drawName) {
-  c.fillRect(this.rect.x, this.rect.y, this.rect.w, this.rect.h);
+Unit.prototype.draw = function(ctx, drawName, img, x, y) {
+
+  var base_image = new Image();
+  base_image.src = img;
+  base_image.onload = function(){
+    ctx.drawImage(base_image, x, y);
+  }
+
   if(drawName) {
-    c.textAlign = "center";
-    c.fillStyle = this.nameColor;
-    c.font = "20px Georgia";
-    c.fillText(this.name, this.rect.x+(this.rect.w/2), this.rect.y - 2);
+    ctx.textAlign = "center";
+    ctx.fillStyle = this.nameColor;
+    ctx.font = "20px Georgia";
+    ctx.fillText(this.name, x+(this.rect.w/2), y - 2);
   }
 };
 
@@ -36,42 +42,53 @@ Unit.prototype.update = function() {
   this.pos.add(dpos);
 };
 
+ChickenUnit.prototype = new Unit("chicken", "black", {x:150, y:150, w: 32, h:32}, 100);
+
+CowUnit.prototype = new Unit("Cow", "black", {x:150, y:150, w: 32, h:32}, 100);
+
+PigUnit.prototype = new Unit("Pig", "black", {x:150, y:150, w: 32, h:32}, 100);
+
 function ChickenUnit(planet) {
   if(planet == "frontier"){
-    this.imageArray = ["../images/chicken_back_helmet.png", "../images/chicken_left_helmet.png", "../images/chicken_right_helmet.png.png", "../images/chicken_front_helmet.png"]
+    this.imageArray = ["images/chicken_back_helmet.png", "images/chicken_left_helmet.png", "images/chicken_right_helmet.png.png", "images/chicken_front_helmet.png"];
   }else{
-    this.imageArray = ["../images/chicken_back.png", "../images/chicken_left.png", "../images/chicken_right.png", "../images/chicken_front.png"]
+    this.imageArray = ["images/chicken_back.png", "images/chicken_left.png", "images/chicken_right.png", "images/chicken_front.png"];
   }
 
   this.damage = 10;
-  this.hp     = 100; 
+  this.hp     = 100;
+}
+
+ChickenUnit.prototype.drawUnit = function(ctx, drawName){
+  this.draw(ctx, drawName, this.imageArray[3], this.rect.x, this.rect.y);
 }
 
 function CowUnit(planet) {
   if(planet == "frontier"){
-    this.imageArray = ["../images/cow_back_helmet.png", "../images/cow_left_helmet.png", "../images/cow_right_helmet.png.png", "../images/cow_front_helmet.png"]
+    this.imageArray = ["images/cow_back_helmet.png", "images/cow_left_helmet.png", "images/cow_right_helmet.png.png", "images/cow_front_helmet.png"]
   }else{
-    this.imageArray = ["../images/cow_back.png", "../images/cow_left.png", "../images/cow_right.png", "../images/cow_front.png"]
+    this.imageArray = ["images/cow_back.png", "images/cow_left.png", "images/cow_right.png", "images/cow_front.png"]
   }
 
   this.damage = -5;
   this.hp = 200;
 }
 
+CowUnit.prototype.drawUnit = function(ctx, drawName){
+  this.draw(ctx, drawName, this.imageArray[3], this.rect.x, this.rect.y);
+}
+
 function PigUnit(planet) {
   if(planet == "frontier"){
-    this.imageArray = ["../images/pig_back_helmet.png", "../images/pig_left_helmet.png", "../images/pig_right_helmet.png.png", "../images/pig_front_helmet.png"]
+    this.imageArray = ["images/pig_back_helmet.png", "images/pig_left_helmet.png", "images/pig_right_helmet.png.png", "images/pig_front_helmet.png"]
   }else{
-    this.imageArray = ["../images/pig_back.png", "../images/pig_left.png", "../images/pig_right.png", "../images/pig_front.png"]
+    this.imageArray = ["images/pig_back.png", "images/pig_left.png", "images/pig_right.png", "images/pig_front.png"]
   }
 
   this.damage = 3;
   this.hp = 300;
 }
 
-ChickenUnit.prototype = new Unit("chicken", "red", {x:300, y:300, w: 32, h:32}, 100);
-
-CowUnit.prototype = new Unit("Cow", "red", {x:300, y:300, w: 32, h:32}, 100);
-
-PigUnit.prototype = new Unit("Pig", "red", {x:300, y:300, w: 32, h:32}, 100);
-
+PigUnit.prototype.drawUnit = function(ctx, drawName){
+  this.draw(ctx, drawName, this.imageArray[3], this.rect.x, this.rect.y);
+}

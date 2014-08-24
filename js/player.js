@@ -7,15 +7,20 @@ function Player(name) {
 }
 
 //draw player stats
-Player.prototype.drawPlayer = function(context) {
-  var message;
+Player.prototype.drawPlayerHomeWorld = function(context) {
+  var message = "Resources - " 
+    + this.homeWorldResources;
+  
+  context.fillStyle = "black";
+  context.font = "20px Georgia";
+  return context.fillText(message, 100, 480);
+}
 
-  message = this.name + "       Resources - " 
-    + this.homeWorldResources +
-    "                         Resources - " 
+Player.prototype.drawPlayerFrontier = function(context) {
+  var message = "Resources - " 
     + this.frontierResources;
-
-  context.fillStyle = "red";
+  
+  context.fillStyle = "black";
   context.font = "20px Georgia";
   return context.fillText(message, 100, 480);
 }
@@ -56,12 +61,15 @@ Player.prototype.addResources = function(planet, amount){
 } 
 
 //draws all the players units 
-Player.prototype.drawAllUnits = function(){
+Player.prototype.drawHomeWorldUnits = function(ctx){
   for(var i = 0; i < this.homeWorldUnits.length; i++){
-    this.homeWorldUnits[i].draw;
+    this.homeWorldUnits[i].drawUnit(ctx, true);
   }
+}
+
+Player.prototype.drawFrontierUnits = function(ctx){
   for(var i = 0; i < this.frontierUnits.length; i++){
-    this.frontierUnits[i].draw;
+    this.frontierUnits[i].drawUnit(ctx, true);
   }
 }
 

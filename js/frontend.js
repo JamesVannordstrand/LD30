@@ -1,18 +1,23 @@
 //the base game class
 function Game() {
-  //get the canvas and canvs 2D context 
-  this.canvas = document.getElementById("myCanvas");
-  this.context = this.canvas.getContext("2d");
+  //get the canvas and canvas 2D context 
+  this.homeWorldCanvas = document.getElementById("homeWorldCanvas");
+  this.homeWorldContext = this.homeWorldCanvas.getContext("2d");
+  this.homeWorldCursor = new Cursor(this.homeWorldCanvas, this.onClick);
+
+
+  this.frontierCanvas = document.getElementById("frontierCanvas");
+  this.frontierContext = this.frontierCanvas.getContext("2d");
+  this.frontierCursor = new Cursor(this.frontierCanvas, this.onClick);
 
   this.fps = 60;
   this.running = true;
   this.map = new Map();
-  this.cursor = new Cursor(this.canvas, this.onClick);
   this.player = new Player("PLAYER");
 }
 
 Game.prototype.onClick = function() {
-  alert("CLicked");
+  alert("Clicked");
 };
 
 //initialize the game
@@ -20,43 +25,40 @@ Game.prototype.start = function() {
   //setup an interval for the game loop to be called on TODO: untested
   this._intervalId = setInterval(Game.loop, 1000 / game.fps);
   //tell the cursor to listen for events on this canvas 
-  this.cursor.listen(this.canvas);
+  this.homeWorldCursor.listen(this.homeWorldCanvas);
+  this.frontierCursor.listen(this.frontierCanvas);
  
   //TODO: test unit
-  var lance = new Unit("lance", "#666000", {x:300, y:300, w: 32, h:32}, 100);
-  var blake = new Unit("blake", "red", {x:300, y:300, w: 32, h:32}, 100);
-  var bryce = new Unit("bryce", "red", {x:300, y:300, w: 32, h:32}, 100);
-  var james = new Unit("james", "red", {x:300, y:300, w: 32, h:32}, 100);
-  this.player.addUnit("frontier", lance);
-  this.player.addUnit("frontier", blake);
-  this.player.addUnit("frontier", bryce);
-  this.player.addUnit("frontier", james);
-  this.player.drawAllUnits;
+  // var lance = new Unit("lance", "#666000", {x:300, y:300, w: 32, h:32}, 100);
+  // var blake = new Unit("blake", "red", {x:300, y:300, w: 32, h:32}, 100);
+  // var bryce = new Unit("bryce", "red", {x:300, y:300, w: 32, h:32}, 100);
+  var james = new ChickenUnit("frontier");
+  // this.player.addUnit("frontier", lance);
+  // this.player.addUnit("frontier", blake);
+  // this.player.addUnit("frontier", bryce);
+  this.player.addUnit("homeWorld", james);
 }
 
 //draw the game
 Game.prototype.draw = function() {
-  this.context.fillStyle = "#FF0000";
-  this.context.fillRect(0,0,150,75);
 
   //draw the map
-  this.map.drawGrid(this.context);
+  this.map.drawGrid(this.homeWorldContext);
+  this.map.drawGrid(this.frontierContext);
 
   //draw the player's units
-  for(i = 0; i < this.player.homeWorldUnits.length; ++i) {
-    this.player.homeworldUnits[i].draw(this.context);
-  }
-  for(i = 0; i < this.player.frontierUnits.length; ++i) {
-    this.player.frontierUnits[i].draw(this.context);
-  }
+  this.player.drawHomeWorldUnits(this.homeWorldContext);
+  this.player.drawFrontierUnits(this.frontierContext);
  
   //draw the player
-  this.player.drawPlayer(this.context);
+  this.player.drawPlayerHomeWorld(this.homeWorldContext);
+  this.player.drawPlayerFrontier(this.frontierContext);
 };
 
 //update the game
 Game.prototype.update = function() {
-  this.cursor.checkDirty()
+  this.homeWorldCursor.checkDirty();
+  this.frontierCursor.checkDirty();
 };
 
 //the main game loop - run on an interval
