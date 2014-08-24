@@ -8,7 +8,7 @@ function Game() {
   this.running = true;
   this.map = new Map();
   this.cursor = new Cursor(this.canvas, this.onClick);
-  this.player = player("PLAYER", false);
+  this.player = new Player("PLAYER");
 }
 
 Game.prototype.onClick = function() {
@@ -24,7 +24,7 @@ Game.prototype.start = function() {
  
   //TODO: test unit
   var lance = new Unit("lance", "#666000", {x:300, y:300, w: 32, h:32}, 100);
-  this.player.addUnit(lance);
+  this.player.addUnit("frontier", lance);
 }
 
 //draw the game
@@ -36,11 +36,11 @@ Game.prototype.draw = function() {
   this.map.drawGrid(this.context);
 
   //draw the player's units
-  for(i = 0; i < player.homeworldUnits.length; ++i) {
-    player.homeworldUnits[i].draw(this.context);
+  for(i = 0; i < this.player.homeWorldUnits.length; ++i) {
+    this.player.homeworldUnits[i].draw(this.context);
   }
-  for(i = 0; i < player.frontierUnits.length; ++i) {
-    player.frontierUnits[i].draw(this.context);
+  for(i = 0; i < this.player.frontierUnits.length; ++i) {
+    this.player.frontierUnits[i].draw(this.context);
   }
  
   //draw the player
