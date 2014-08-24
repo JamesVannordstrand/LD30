@@ -24,7 +24,14 @@ Game.prototype.start = function() {
  
   //TODO: test unit
   var lance = new Unit("lance", "#666000", {x:300, y:300, w: 32, h:32}, 100);
+  var blake = new Unit("blake", "red", {x:300, y:300, w: 32, h:32}, 100);
+  var bryce = new Unit("bryce", "red", {x:300, y:300, w: 32, h:32}, 100);
+  var james = new Unit("james", "red", {x:300, y:300, w: 32, h:32}, 100);
   this.player.addUnit("frontier", lance);
+  this.player.addUnit("frontier", blake);
+  this.player.addUnit("frontier", bryce);
+  this.player.addUnit("frontier", james);
+  this.player.drawAllUnits;
 }
 
 //draw the game
