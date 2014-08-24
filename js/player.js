@@ -17,7 +17,7 @@ Player.prototype.drawPlayer = function(context) {
 
   context.fillStyle = "red";
   context.font = "20px Georgia";
-  return context.fillText(message, 240, 480);
+  return context.fillText(message, 100, 480);
 }
 
 //add a specific unit to player

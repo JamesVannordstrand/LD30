@@ -8,6 +8,7 @@ function Game() {
   this.running = true;
   this.map = new Map();
   this.cursor = new Cursor(this.canvas, this.onClick);
+  this.player = new Player("PLAYER");
 }
 
 Game.prototype.onClick = function() {
@@ -16,13 +17,14 @@ Game.prototype.onClick = function() {
 
 //initialize the game
 Game.prototype.start = function() {
+  //setup an interval for the game loop to be called on TODO: untested
   this._intervalId = setInterval(Game.loop, 1000 / game.fps);
+  //tell the cursor to listen for events on this canvas 
+  this.cursor.listen(this.canvas);
  
   //TODO: test unit
-  this.lance = new Unit("lance", "#666000", {x:300, y:300, w: 32, h:32}, 100);
-
-  this.playerOne = new Player("James");
-  this.cursor.listen(this.canvas);
+  var lance = new Unit("lance", "#666000", {x:300, y:300, w: 32, h:32}, 100);
+  this.player.addUnit("frontier", lance);
 }
 
 //draw the game
@@ -33,11 +35,16 @@ Game.prototype.draw = function() {
   //draw the map
   this.map.drawGrid(this.context);
 
-  //TODO: test draw
-  this.lance.draw(this.context, true);
-  
+  //draw the player's units
+  for(i = 0; i < this.player.homeWorldUnits.length; ++i) {
+    this.player.homeworldUnits[i].draw(this.context);
+  }
+  for(i = 0; i < this.player.frontierUnits.length; ++i) {
+    this.player.frontierUnits[i].draw(this.context);
+  }
+ 
   //draw the player
-  this.playerOne.drawPlayer(this.context);
+  this.player.drawPlayer(this.context);
 };
 
 //update the game
