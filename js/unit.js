@@ -1,5 +1,5 @@
 //creates a unit 
-function Unit(name, nameColor, rect, speed,pos,dest) {
+function Unit(name, nameColor, rect, speed, pos, dest) {
   this.name = name;
   this.nameColor = nameColor;
   this.rect = rect;
@@ -7,6 +7,8 @@ function Unit(name, nameColor, rect, speed,pos,dest) {
 
   this.pos = new Vec2(0,0);
   this.dest = new Vec2(0,0);
+
+  this.hp = 100;
 }
 
 //draw the unit 
