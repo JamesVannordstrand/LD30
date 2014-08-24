@@ -1,35 +1,46 @@
-//the screen variable
-var screen = {
-  tileW: 20,
-  tileH: 15,
-  pixW:  640,
-  pixH:  480
+//the base game class
+function Game() {
+  this.fps = 60;
+  this.running = true;
+  this.map = new Map();
 }
 
-//draws a grid representing the tile layout of the screen
-function drawGrid() {
-  //draw horizontal lines
-  for(i = 0; i < screen.pixH / screen.tileH; i++) {
-    ctx.beginPath();
-    ctx.moveTo(0, i * screen.tileH);
-    ctx.lineTo(screen.pixW, i * screen.tileH)
-    ctx.stroke();
-  }
-  //draw vertical lines
-  for(i = 0; i < screen.pixW / screen.tileW; i++) {
-    ctx.beginPath();
-    ctx.moveTo(i * screen.tileW, 0);
-    ctx.lineTo(i * screen.tileW, screen.pixH);
-    ctx.stroke();
-  }
+//initialize the game
+Game.prototype.start = function() {
+  this._intervalId = setInterval(Game.loop, 1000 / game.fps);
+
+  //TODO: test unit
+  this.lance = new Unit("lance", "#666000", {x:300, y:300, w: 32, h:32}, 100);
 }
 
-///////////////////////////////////////////////////////////////////////////////
-var c = document.getElementById("myCanvas");
-var ctx = c.getContext("2d");
-ctx.fillStyle = "#FF0000";
-ctx.fillRect(0,0,150,75);
-drawGrid();
+//draw the game
+Game.prototype.draw = function() {
+  var c = document.getElementById("myCanvas");
+  var ctx = c.getContext("2d");
+  ctx.fillStyle = "#FF0000";
+  ctx.fillRect(0,0,150,75);
 
-var lance = new unit("lance", "#666000", {x:300, y:300, w: 32, h:32});
-drawUnit(ctx, lance, true);
+  //draw the map
+  this.map.drawGrid(ctx);
+
+  //TODO: test draw
+  this.lance.draw(ctx, true);
+};
+
+//update the game
+Game.prototype.update = function() {
+  
+};
+
+//the main game loop - run on an interval
+Game.prototype.loop = function() {
+  this.update();
+  this.draw();
+}
+
+
+//create the game and begin it
+var game = new Game();
+game.start();
+game.draw();
+
