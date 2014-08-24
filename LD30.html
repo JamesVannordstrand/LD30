@@ -13,6 +13,8 @@
 
     <canvas id="frontierCanvas" width="320" height="480" style="background: url('images/frontier.png'); background-size: 320px, 480px; background-repeat: no-repeat; border:1px solid #c3c3c3;">
     </canvas>
+    
+    <br>
 
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="js/vector.js"></script>
@@ -21,6 +23,18 @@
     <script src="js/player.js"></script>
     <script src="js/cursor.js"></script>
     <script src="js/frontend.js"></script>
+
+    Send Resources - <input id="homeWorldTextBox" type="text" style="margin-right:8em;"> Send Resources - <input id="frontierTextBox" type="text"><br>
+    <button id="homeWorldButton" type="button" onClick="transferResources(game.player, 'homeWorld')">Launch!</button>
+    <button id="homeWorldPig" type="button" onClick="buyUnitHomeWorld(game.player, 'pig')">Pig</button>
+    <button id="homeWorldCow" type="button" onClick="buyUnitHomeWorld(game.player, 'cow')">Cow</button>
+    <button id="homeWorldChicken" type="button" onClick="buyUnitHomeWorld(game.player, 'chicken')" style="margin-right:10em;">Chicken</button>
+
+    <button id="frontierButton" type="button" onClick="transferResources(game.player, 'frontier')">Launch!</button> 
+    <button id="frontierPig" type="button" onClick="buyUnitFrontier(game.player, 'pig')">Pig</button>
+    <button id="frontierCow" type="button" onClick="buyUnitFrontier(game.player, 'cow')">Cow</button>
+    <button id="frontierChicken" type="button" onClick="buyUnitFrontier(game.player, 'chicken')">Chicken</button>
+
   </body>
 </html>
 

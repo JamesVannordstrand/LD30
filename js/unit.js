@@ -48,6 +48,8 @@ CowUnit.prototype = new Unit("Cow", "black", {x:150, y:150, w: 32, h:32}, 100);
 
 PigUnit.prototype = new Unit("Pig", "black", {x:150, y:150, w: 32, h:32}, 100);
 
+EnemyUnit.prototype = new Unit("Enemy", "black", {x: Math.floor((Math.random() * 290) + 1), y:0, w: 32, h: 32}, 100);
+
 function ChickenUnit(planet) {
   if(planet == "frontier"){
     this.imageArray = ["images/chicken_back_helmet.png", "images/chicken_front_helmet.png"];
@@ -91,4 +93,14 @@ function PigUnit(planet) {
 
 PigUnit.prototype.drawUnit = function(ctx, drawName){
   this.draw(ctx, drawName, this.imageArray[1], this.rect.x, this.rect.y);
+}
+
+function EnemyUnit() {
+  this.img = "images/alien_32.png";
+  this.damage = 5;
+  this.hp = 200;
+}
+
+EnemyUnit.prototype.drawUnit = function(ctx, drawName){
+  this.draw(ctx, drawName, this.img, this.rect.x, this.rect.y);
 }
