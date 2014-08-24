@@ -33,3 +33,6 @@ drawGrid();
 
 var lance = new unit("lance", "#666000", {x:300, y:300, w: 32, h:32});
 drawUnit(ctx, lance, true);
+
+var playerOne = new player("James", false);
+playerOne.drawPlayer(ctx);
