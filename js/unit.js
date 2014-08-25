@@ -1,5 +1,5 @@
 //creates a unit 
-function Unit(name, homeworldAnimation, frontierAnimation, nameColor, pos, speed, damage, hp) {
+function Unit(name, homeworldAnimation, frontierAnimation, nameColor, pos, speed, damage, hp, vision) {
   this.name = name;
   this.nameColor = nameColor;
 
@@ -25,7 +25,10 @@ function Unit(name, homeworldAnimation, frontierAnimation, nameColor, pos, speed
     this.fAnimation.push(img);
   }
 
-  planet = 0; //0=homeworld, 1=frontier
+  this.planet = 0; //0=homeworld, 1=frontier
+  this.vision = vision;
+
+  this.tags = [];
 }
 
 //draw the unit 
@@ -65,6 +68,10 @@ Unit.prototype.update = function() {
   }
 };
 
+Unit.prototype.addTag = function(tag) {
+  this.tags.push(tag);
+};
+
 function ChickenUnit() {
   return new Unit(
     "Chicken",  //unit name
@@ -74,7 +81,8 @@ function ChickenUnit() {
     {x:150, y:150}, //position
     1.3,  //speed
     10,   //damage
-    100   //hp
+    100,  //hp
+    100   //the units away that this unit will see targets
   );
 }
 function CowUnit() {
@@ -86,7 +94,8 @@ function CowUnit() {
     {x: 100, y: 100}, //position
     .6,   //speed
     -5,   //damage
-    200   //hp
+    200,  //hp
+    100   //the units away that this unit will see targets
   );
 }
 function PigUnit() {
@@ -98,7 +107,8 @@ function PigUnit() {
     {x: 100, y: 100}, //position
     .9,   //speed
     3,    //damage
-    300   //hp
+    300,  //hp
+    100   //the units away that this unit will see targets
   );
 }
 function EnemyUnit() {
@@ -110,7 +120,8 @@ function EnemyUnit() {
     {x: Math.floor((Math.random() * 290) + 1), y: 0},
     .9,   //speed
     3,    //damage
-    300   //hp
+    300,  //hp
+    100   //the units away that this unit will see targets
   );
 }
 
