@@ -8,7 +8,7 @@ function Cursor(canvas, onClick) {
 //get the mouse position on the given canvas
 Cursor.prototype.getMousePos = function(x, y) {
   var rect = this.canvas.getBoundingClientRect();
-  return new Vec2(x - rect.left, y - rect.top);
+  return {x: x - rect.left, y: y - rect.top};
 };
 
 //have the cursor listen for events on the given canvas
